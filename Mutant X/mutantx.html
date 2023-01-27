@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutant X</title>
+    <script src="./js/mutantx.js"></script>
+</head>
+<body>
+    <h1>Mutant X</h1>
+    <section id="section_selectmutant">
+        <h2>Elige tu mutante:</h2>
+
+        
+        <input type="radio" name="mascota" id="dragon">
+        <label for="dragon">Dragono</label>
+        
+        <input type="radio" name="mascota" id="arbol">
+        <label for="arbol">Arbolium</label>
+        
+        <input type="radio" name="mascota" id="tiburon">
+        <label for="tiburon">Tibura</label>
+
+        <Button id="button_selectmutant">Seleccionar</BUtton>
+    
+    </section>
+
+    <section id="section_selectattack">
+        <h2>Elige tu ataque:</h2>
+        <p> Tu mutante <span id="mutantname_player"></span> tiene <span>3</span> vidas </p>
+        <p> Tu oponente <span id="mutantname_enemy"></span> tiene <span>2</span> vidas  </p>
+
+        <p>
+            <button id="button_fire">Fuego mortal</button>
+            <button id="button_water">Cañon de Agua</BUtton>
+            <button id="button_forest">Bosque vivo</button>
+        </p>
+    </section>
+
+    <section id="section_messages">
+        <p>Tu mutante atacó con Fuego Mortal y tu con Cañon de Agua, Ganaste </p>
+    </section>
+    
+    <section id="section_reboot">
+        <button id="button_restart">Reiniciar</button>
+    </section>
+
+
+</body>
+</html>
