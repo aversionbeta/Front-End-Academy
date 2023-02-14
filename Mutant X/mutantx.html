@@ -6,45 +6,75 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mutant X</title>
     <script src="./js/mutantx.js"></script>
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <h1>Mutant X</h1>
     <section id="section_selectmutant">
+
+        <h1 class="title">Mutant X</h1>
+
         <h2>Elige tu mutante:</h2>
 
-        
-        <input type="radio" name="mascota" id="dragon">
-        <label for="dragon">Dragono</label>
-        
-        <input type="radio" name="mascota" id="arbol">
-        <label for="arbol">Arbolium</label>
-        
-        <input type="radio" name="mascota" id="tiburon">
-        <label for="tiburon">Tibura</label>
+        <div class="cards">
+                    
+            
+            <label class="mutantx_card" for="dragono">
+                <input type="radio" name="mascota" id="dragon">
+                <p>Dragono</p>
+                <img src="./assets/Dragono.png" alt="Dragono">
+            </label>
+            
+            <label class="mutantx_card" for="arbolo">
+                <input type="radio" name="mascota" id="arbol">
+                <p>Arbolium</p>
+                <img src="./assets/Arboro.png" alt="Arbolium">
+            </label>
+            
+            <label class="mutantx_card" for="tiburono">
+                <input type="radio" name="mascota" id="tiburon">
+                <p>Tibura</p>
+                <img src="./assets/Tibura.png" alt="Tibura">
+            </label>
+        </div>
+
 
         <Button id="button_selectmutant">Seleccionar</BUtton>
     
     </section>
 
     <section id="section_selectattack">
+        <h1 class="title">Mutant X</h1>
         <h2>Elige tu ataque:</h2>
-        <p> Tu mutante <span id="mutantname_player"></span> tiene <span>3</span> vidas </p>
-        <p> Tu oponente <span id="mutantname_enemy"></span> tiene <span>2</span> vidas  </p>
 
-        <p>
+
+        <div>
             <button id="button_fire">Fuego mortal</button>
             <button id="button_water">Cañon de Agua</BUtton>
             <button id="button_forest">Bosque vivo</button>
-        </p>
-    </section>
+        </div>
 
-    <section id="section_messages">
-    </section>
-    
-    <section id="section_reboot">
-        <button id="button_restart">Reiniciar</button>
-    </section>
+        <div id="section_messages">
+            <p id="result">¡A jugar!</p>
 
+            <section id="section_reboot">
+                <button id="button_restart">Reiniciar</button>
+            </section>
+        </div>
+
+
+        <div class="history">
+            <div>
+                <p id="mutantname_player"></p>
+                <p id="lifes_player"></p>
+                <div id="player_attack"></div>
+            </div>
+            <div>
+                <p id="mutantname_enemy"></p>
+                <p id="lifes_enemy"></p>
+                <div id="enemy_attack"></div>
+            </div>
+        </div>
+    </section>
 
 </body>
 </html>

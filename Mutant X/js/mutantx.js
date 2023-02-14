@@ -1,9 +1,18 @@
 let playerAttack
 let enemyAttack
+let playerHealth = 3
+let enemyHealth = 3
 
 
 
 function startGame() {
+    let sectionRestart = document.getElementById("section_reboot")
+    sectionRestart.style.display = "none"
+    
+    
+    let sectionAttack = document.getElementById("section_selectattack")
+    sectionAttack.style.display = "none"
+        
     let buttonSelectMutant = document.getElementById('button_selectmutant')
     buttonSelectMutant.addEventListener('click', selectMascotPlayer);
 
@@ -15,15 +24,18 @@ function startGame() {
 
     let buttonForest = document.getElementById('button_forest');
     buttonForest.addEventListener('click',forestAttack);
+
+    let buttonRestart = document.getElementById('button_restart');
+    buttonRestart.addEventListener('click', restartGame);
+
 }
 
 function selectMascotPlayer() {
+
     let inputDragon = document.getElementById('dragon')
     let inputArbol = document.getElementById('arbol')
     let inputTiburon = document.getElementById('tiburon')
-    let spanMascotPlayer = document.getElementById('mutantname_player')
-
-
+    let spanMascotPlayer = document.getElementById('mutantname_player') 
     
     if (inputDragon.checked) {
         spanMascotPlayer.innerHTML = 'Dragono'
@@ -38,6 +50,11 @@ function selectMascotPlayer() {
         alert("No seleccionaste ninguna opción")
 
     }
+
+    let sectionAttack = document.getElementById("section_selectattack")
+    sectionAttack.style.display = "flex"
+    let sectionMutant = document.getElementById("section_selectmutant")
+    sectionMutant.style.display = "none"
 
     SelectMascotEnemy()
 }
@@ -89,39 +106,107 @@ function enemyRandomAttack() {
     combat();
 }
 
-function createMessage(resultAttack) {
-    let sectionMessage = document.getElementById('section_messages')
-    let attackParagraph = document.createElement('p')
-    attackParagraph.innerHTML = 'Tu mutante atacó con ' + playerAttack + ' y tu enemigo atacó con ' + enemyAttack +', ' + resultAttack
-    sectionMessage.appendChild(attackParagraph)
+function createMessage(result) {
+    let sectionMessage = document.getElementById('result')
+    let playAttack= document.getElementById('player_attack')
+    let eneAttack=document.getElementById('enemy_attack')
+
+    let newPlayerAttack = document.createElement('p')
+    let newEnemyAttack = document.createElement('p')
+
+    sectionMessage.innerHTML = result
+    newPlayerAttack.innerHTML = playerAttack
+    newEnemyAttack.innerHTML = enemyAttack
+        
+    playAttack.appendChild(newPlayerAttack)
+    eneAttack.appendChild(newEnemyAttack)
+
     
+}
+
+function createMessageFinal(finalResult) {
+    let sectionMessage = document.getElementById('result')
+    
+    sectionMessage.innerHTML = finalResult
+
+    let buttonSelectMutant = document.getElementById('button_selectmutant')
+    buttonSelectMutant.disabled = true
+    let buttonFire=document.getElementById('button_fire')
+    buttonFire.disabled= true
+    let buttonWater= document.getElementById('button_water')
+    buttonWater.disabled= true
+    let buttonForest = document.getElementById('button_forest');
+    buttonForest.disabled= true
+
+    let sectionRestart = document.getElementById("section_reboot")
+    sectionRestart.style.display = "block"
+    let buttonRestart = document.getElementById('button_restart');
+    buttonRestart.addEventListener('click', restartGame);
 }
 
 function combat() {
+
+    let spanLifesPlayer = document.getElementById('lifes_player')
+    let spanLifesEnemy = document.getElementById('lifes_enemy')
+
+
     
     if (enemyAttack == playerAttack) {
         createMessage('Empate')
+        enemyHealth
+        playerHealth
+        spanLifesEnemy.innerHTML = enemyHealth
+        spanLifesPlayer.innerHTML = playerHealth
     }
     else if (enemyAttack == 'Fuego Mortal' && playerAttack == 'Cañón de Agua') {
         createMessage('Ganaste el movimiento')
+        enemyHealth --
+        spanLifesEnemy.innerHTML = enemyHealth
     }
     else if (enemyAttack == 'Fuego Mortal' && playerAttack == 'Bosque Vivo') {
         createMessage('Perdiste el movimiento')
+        playerHealth --
+        spanLifesPlayer.innerHTML = playerHealth
     }
     else if (enemyAttack == 'Cañón de Agua' && playerAttack == 'Bosque Vivo') {
         createMessage('Ganaste el movimiento')
+        enemyHealth --
+        spanLifesEnemy.innerHTML = enemyHealth
     }
     else if (enemyAttack == 'Cañón de Agua' && playerAttack == 'Fuego Mortal') {
         createMessage('Perdiste el movimiento')
+        playerHealth --
+        spanLifesPlayer.innerHTML = playerHealth
     }
     else if (enemyAttack == 'Bosque Vivo' && playerAttack == 'Cañón de Agua') {
         createMessage('Perdiste el movimiento')
+        playerHealth --
+        spanLifesPlayer.innerHTML = playerHealth
     }
     else if (enemyAttack == 'Bosque Vivo' && playerAttack == 'Fuego Mortal') {
         createMessage('Ganaste el movimiento')
+        enemyHealth --
+        spanLifesEnemy.innerHTML = enemyHealth 
     }
+
+    lifesCount()
 }
 
+function lifesCount(){
+    if (enemyHealth==0){
+        createMessageFinal('¡Ganaste! Batalla Finalizada, la vida de tu enemigo es ' + enemyHealth + ' y la tuya es de ' + playerHealth)   
+    }
+    else if (playerHealth==0){
+        createMessageFinal('Perdiste... Batalla Finalizada, la vida de tu enemigo es ' + enemyHealth + ' y la tuya es de ' + playerHealth)
+    }
+
+    
+}
+
+function restartGame() {
+    location.reload()
+    
+}
 
 function aleatorio(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min)
