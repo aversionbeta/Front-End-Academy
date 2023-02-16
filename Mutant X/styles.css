@@ -31,7 +31,7 @@
 }
 
 
-.mutantx_card img {
+.mutantx_mutant {
     height: 110px;
 }
 
@@ -65,6 +65,14 @@ button:hover {
     border-radius: 20px;
 }
 
+.mutantx_card:hover {
+    background-color: yellowgreen;
+}
+
+.mutantx_card:checked{
+    background-color: green;
+}
+
 .history{
     display: grid;
     grid-template-columns: 150px 150px;
@@ -85,9 +93,8 @@ button:hover {
     margin: 20px;
     text-align: center;
     border-radius: 50px
-
-
 }
+
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;700&display=swap');
 

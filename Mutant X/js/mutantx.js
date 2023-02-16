@@ -1,79 +1,138 @@
+const sectionRestart = document.getElementById("section_reboot")
+const sectionAttack = document.getElementById("section_selectattack")
+const buttonSelectMutant = document.getElementById('button_selectmutant')
+const buttonFire=document.getElementById('button_fire')
+const buttonWater= document.getElementById('button_water')
+const buttonForest = document.getElementById('button_forest');
+const buttonRestart = document.getElementById('button_restart');
+const spanMascotPlayer = document.getElementById('mutantname_player')
+const sectionMutant = document.getElementById("section_selectmutant")
+const spanMascotEnemy = document.getElementById('mutantname_enemy')
+const sectionMessage = document.getElementById('result')
+const playAttack= document.getElementById('player_attack')
+const eneAttack=document.getElementById('enemy_attack')
+const newPlayerAttack = document.createElement('p')
+const newEnemyAttack = document.createElement('p')
+const cardsContainer=document.getElementById('cards_container')
+
+
+let mutants = []
 let playerAttack
 let enemyAttack
+let mutantOptions
+let inputDragon 
+let inputArbol 
+let inputTiburon
+let playerMutant
 let playerHealth = 3
 let enemyHealth = 3
 
 
+class mutant {
+    constructor(mutantname,pic,life){
+        this.name = mutantname
+        this.pic = pic
+        this.life = life
+        this.attacks = []
+    }    
+}
+
+let tibura = new mutant('Tibura', './assets/Tibura.png', 3)
+let dragono = new mutant('Dragono', './assets/Dragono.png', 3)
+let arbolium = new mutant('Arbolium', './assets/Arboro.png' , 3)
+
+tibura.attacks.push(
+    {name: 'Ola mortal', id: 'button_water'},
+    {name: 'Maremoto de Neptuno', id: 'button_water'},
+    {name: 'Lluvia oscura', id: 'button_water'},
+    {name: 'Cañon de agua', id: 'button_water'},
+    {name: 'Huracán tropical', id: 'button_water'}
+)
+
+arbolium.attacks.push(
+    {name: 'Bosque vivo', id: 'button_water'},
+    {name: 'Hiedra venenosa', id: 'button_water'},
+    {name: 'Fruta del mal', id: 'button_water'},
+    {name: 'Terremoto de urano', id: 'button_water'},
+    {name: 'Tierra mala', id: 'button_water'}
+)
+
+dragono.attacks.push(
+    {name: 'Cañon de fuego', id: 'button_water'},
+    {name: 'Fuego Mortal', id: 'button_water'},
+    {name: 'Fuego doble', id: 'button_water'},
+    {name: 'Fuego Triple', id: 'button_water'},
+    {name: 'Fuego oscuro', id: 'button_water'}
+)
+
+mutants.push(tibura, dragono, arbolium)
+
+
 
 function startGame() {
-    let sectionRestart = document.getElementById("section_reboot")
+    
     sectionRestart.style.display = "none"
-    
-    
-    let sectionAttack = document.getElementById("section_selectattack")
     sectionAttack.style.display = "none"
-        
-    let buttonSelectMutant = document.getElementById('button_selectmutant')
-    buttonSelectMutant.addEventListener('click', selectMascotPlayer);
-
-    let buttonFire=document.getElementById('button_fire')
-    buttonFire.addEventListener('click', fireAttack);
     
-    let buttonWater= document.getElementById('button_water')
+    mutants.forEach((mutant) => {
+        mutantOptions = `
+        <label class="mutantx_card" for=${mutant.name}>
+            <input type="radio" name="mascota" id=${mutant.name}>
+            <p>${mutant.name}</p>
+            <img src=${mutant.pic} class="mutantx_mutant" alt=${mutant.name}>
+        </label>
+        `
+        cardsContainer.innerHTML += mutantOptions
+
+        inputArbol= document.getElementById('Arbolium')
+        inputDragon = document.getElementById('Dragono')
+        inputTiburon= document.getElementById('Tibura')
+    })
+
+    buttonSelectMutant.addEventListener('click', selectMascotPlayer);
+    buttonFire.addEventListener('click', fireAttack);
     buttonWater.addEventListener('click', waterAttack);
-
-    let buttonForest = document.getElementById('button_forest');
     buttonForest.addEventListener('click',forestAttack);
-
-    let buttonRestart = document.getElementById('button_restart');
     buttonRestart.addEventListener('click', restartGame);
-
 }
 
 function selectMascotPlayer() {
+    sectionAttack.style.display = "flex"
+    sectionMutant.style.display = "none"
 
-    let inputDragon = document.getElementById('dragon')
-    let inputArbol = document.getElementById('arbol')
-    let inputTiburon = document.getElementById('tiburon')
-    let spanMascotPlayer = document.getElementById('mutantname_player') 
-    
     if (inputDragon.checked) {
-        spanMascotPlayer.innerHTML = 'Dragono'
+        spanMascotPlayer.innerHTML = inputDragon.id
+        mutantPlayer = inputDragon.id
     }
     else if (inputArbol.checked) {
-        spanMascotPlayer.innerHTML = 'Arbolium'
+        spanMascotPlayer.innerHTML = inputArbol.id
+        mutantPlayer = inputArbol.id
     }
     else if (inputTiburon.checked) {
-        spanMascotPlayer.innerHTML = 'Tibura'
+        spanMascotPlayer.innerHTML = inputTiburon.id
+        mutantPlayer = inputTiburon.id
     }
     else {
         alert("No seleccionaste ninguna opción")
 
     }
-
-    let sectionAttack = document.getElementById("section_selectattack")
-    sectionAttack.style.display = "flex"
-    let sectionMutant = document.getElementById("section_selectmutant")
-    sectionMutant.style.display = "none"
-
+    extractAttacks(mutantPlayer)
     SelectMascotEnemy()
 }
 
+function extractAttacks(mutantPlayer) {
+    let extractAttacks
+    for (let i = 0; i < mutants.length; i++){
+        if (mutantPlayer === mutants[i].name) {
+            attacks= mutants[i].attacks
+    }
+}
+}
+
 function SelectMascotEnemy() {
-    let randomEnemy = aleatorio(1,3)
-    let spanMascotEnemy = document.getElementById('mutantname_enemy')
-
-
-    if (randomEnemy == 1) {
-        spanMascotEnemy.innerHTML = 'Dragono'
-    } 
-    else if (randomEnemy == 2) {
-        spanMascotEnemy.innerHTML = 'Arbolium'
-    }
-    else if (randomEnemy == 3) {
-        spanMascotEnemy.innerHTML = 'Tibura'
-    }
-
+    let randomEnemy = aleatorio(0,mutants.length-1)
+    
+    spanMascotEnemy.innerHTML = mutants[randomEnemy].name
 }
 
 function fireAttack() {
@@ -107,13 +166,6 @@ function enemyRandomAttack() {
 }
 
 function createMessage(result) {
-    let sectionMessage = document.getElementById('result')
-    let playAttack= document.getElementById('player_attack')
-    let eneAttack=document.getElementById('enemy_attack')
-
-    let newPlayerAttack = document.createElement('p')
-    let newEnemyAttack = document.createElement('p')
-
     sectionMessage.innerHTML = result
     newPlayerAttack.innerHTML = playerAttack
     newEnemyAttack.innerHTML = enemyAttack
@@ -125,22 +177,13 @@ function createMessage(result) {
 }
 
 function createMessageFinal(finalResult) {
-    let sectionMessage = document.getElementById('result')
-    
+        
     sectionMessage.innerHTML = finalResult
-
-    let buttonSelectMutant = document.getElementById('button_selectmutant')
     buttonSelectMutant.disabled = true
-    let buttonFire=document.getElementById('button_fire')
     buttonFire.disabled= true
-    let buttonWater= document.getElementById('button_water')
     buttonWater.disabled= true
-    let buttonForest = document.getElementById('button_forest');
     buttonForest.disabled= true
-
-    let sectionRestart = document.getElementById("section_reboot")
     sectionRestart.style.display = "block"
-    let buttonRestart = document.getElementById('button_restart');
     buttonRestart.addEventListener('click', restartGame);
 }
 

@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mutant X</title>
-    <script src="./js/mutantx.js"></script>
     <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
@@ -15,28 +14,9 @@
 
         <h2>Elige tu mutante:</h2>
 
-        <div class="cards">
-                    
+        <div class="cards" id="cards_container">
             
-            <label class="mutantx_card" for="dragono">
-                <input type="radio" name="mascota" id="dragon">
-                <p>Dragono</p>
-                <img src="./assets/Dragono.png" alt="Dragono">
-            </label>
-            
-            <label class="mutantx_card" for="arbolo">
-                <input type="radio" name="mascota" id="arbol">
-                <p>Arbolium</p>
-                <img src="./assets/Arboro.png" alt="Arbolium">
-            </label>
-            
-            <label class="mutantx_card" for="tiburono">
-                <input type="radio" name="mascota" id="tiburon">
-                <p>Tibura</p>
-                <img src="./assets/Tibura.png" alt="Tibura">
-            </label>
         </div>
-
 
         <Button id="button_selectmutant">Seleccionar</BUtton>
     
@@ -47,10 +27,10 @@
         <h2>Elige tu ataque:</h2>
 
 
-        <div>
-            <button id="button_fire">Fuego mortal</button>
-            <button id="button_water">Cañon de Agua</BUtton>
-            <button id="button_forest">Bosque vivo</button>
+        <div id="attacks_container">
+            <button id="button_fire">Ataque Fuego</button>
+            <button id="button_water">Ataque Agua</BUtton>
+            <button id="button_forest">Ataque Bosque</button>
         </div>
 
         <div id="section_messages">
@@ -75,6 +55,6 @@
             </div>
         </div>
     </section>
-
+    <script src="./js/mutantx.js"></script>
 </body>
 </html>
