@@ -14,6 +14,9 @@ const eneAttack=document.getElementById('enemy_attack')
 const newPlayerAttack = document.createElement('p')
 const newEnemyAttack = document.createElement('p')
 const cardsContainer=document.getElementById('cards_container')
+const sectionMap = document.getElementById('see_map')
+const gameMap = document.getElementById('map')
+
 
 
 let mutants = []
@@ -26,6 +29,7 @@ let inputTiburon
 let playerMutant
 let playerHealth = 3
 let enemyHealth = 3
+let canvas = gameMap.getContext('2D')
 
 
 class mutant {
@@ -73,6 +77,8 @@ function startGame() {
     
     sectionRestart.style.display = "none"
     sectionAttack.style.display = "none"
+    sectionMap.style.display = "none"  
+    
     
     mutants.forEach((mutant) => {
         mutantOptions = `
@@ -97,8 +103,10 @@ function startGame() {
 }
 
 function selectMascotPlayer() {
-    sectionAttack.style.display = "flex"
+    // sectionAttack.style.display = "flex"
     sectionMutant.style.display = "none"
+    sectionMap.style.display = "flex"
+    
 
     if (inputDragon.checked) {
         spanMascotPlayer.innerHTML = inputDragon.id

@@ -1,7 +1,7 @@
 
 :root{
     font-family: 'Poppins', sans-serif;
-    background-color: #000;
+    background-color: #000000;
     color: aliceblue;
 }
 
@@ -93,6 +93,18 @@ button:hover {
     margin: 20px;
     text-align: center;
     border-radius: 50px
+}
+
+#see_map {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+#map { 
+    border: 2px solid white;
+    height: 70vh;
 }
 
 
